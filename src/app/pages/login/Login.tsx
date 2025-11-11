@@ -1,7 +1,13 @@
+import React from "react";
 import { useCallback, useRef, useState } from "react";
+import { InputLogin } from "./components/InputLogin";
+import { ButtonLogin } from "./components/ButtonLogin";
+import { useContext } from "react";
+import { UsuarioLogadoContext } from "../../shared/contexts";
+const ButtonLoginAny = ButtonLogin as unknown as React.ComponentType<any>;
 
 export const Login = () => { 
-
+    const UsuarioLogadoContex = useContext(UsuarioLogadoContext);
     const inputPasswordRef = useRef<HTMLInputElement>(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -12,16 +18,36 @@ export const Login = () => {
     return (
         <div>
             <h1>Login Page</h1>
+            <p>Welcome, {UsuarioLogadoContex.nomeDoUsuario}!</p>
             <form>
-                <label>
-                    Email:
-                    <input type="text" name="email" value={email} onChange={e => setEmail(e.target.value)} />
-                </label>
-                <label>
-                    Password:
-                    <input type="password" name="password" value={password} ref={inputPasswordRef} onChange={e => setPassword(e.target.value)} onKeyDown={e => e.key === "Enter" ? inputPasswordRef.current?.focus() : undefined} />
-                </label>
-                <button type="button" onClick={handleEntrar}>Login</button>    
+                <InputLogin 
+                    label="Email"
+                    type="text"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    onPressEnter={e => inputPasswordRef.current?.focus()}
+                />
+
+                <InputLogin
+                    label="Password"
+                    type="password"
+                    value={password}
+                    onChange={e => {setPassword(e.target.value)}}
+                    ref={inputPasswordRef}
+                />
+
+                <ButtonLoginAny 
+                    type="submit"
+                    onClick={handleEntrar}
+                >
+                    Entrar
+                </ButtonLoginAny>
+                <ButtonLoginAny
+                    type="button"
+                    onClick={handleEntrar}
+                >Cadastrar</ButtonLoginAny>
+
+
             </form>
         </div>
 )};
