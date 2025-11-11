@@ -1,12 +1,12 @@
-import { useContext, useRef } from 'react';
+import { useRef } from 'react';
 import {Link} from 'react-router-dom';
-import { UsuarioLogadoContext } from '../../shared/contexts';
+import { useUsuarioLogado } from '../../shared/hooks';
 
 export const Dashboard = () => {
 
     const counterRef = useRef({counter: 0});
 
-    const UsuarioLogadoContex = useContext(UsuarioLogadoContext);
+    const {nomeDoUsuario, logout} = useUsuarioLogado();
 
     function IncrementCounter() {
         counterRef.current.counter++;
@@ -16,9 +16,10 @@ export const Dashboard = () => {
     return (
         <div>
             <h1>Dashboard Page</h1>
-            <p>Welcome, {UsuarioLogadoContex.nomeDoUsuario}!</p>
+            <p>Welcome, {nomeDoUsuario}!</p>
             <p>Counter: {counterRef.current.counter}</p>
             <button onClick={IncrementCounter}>Increment Counter</button>
+            <button onClick={logout}>Logout</button>
             <Link to="/login">Go to Login</Link>
         </div>
     );
