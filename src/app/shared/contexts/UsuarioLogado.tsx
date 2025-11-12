@@ -5,7 +5,7 @@ interface UsuarioLogadoContextProps {
     logout: () => void;
 }
 
-const UsuarioLogadoContex = createContext<UsuarioLogadoContextProps>({} as UsuarioLogadoContextProps);
+const UsuarioLogadoContext = createContext<UsuarioLogadoContextProps>({} as UsuarioLogadoContextProps);
 
 const UsuarioLogadoProvider = ({ children }: { children?: React.ReactNode }) => {
 
@@ -21,10 +21,10 @@ const UsuarioLogadoProvider = ({ children }: { children?: React.ReactNode }) => 
     }, []);
 
     return (
-        <UsuarioLogadoContex.Provider value={{ nomeDoUsuario: nome, logout: handleLogout }}>
+        <UsuarioLogadoContext.Provider value={{ nomeDoUsuario: nome, logout: handleLogout }}>
             {children}
-        </UsuarioLogadoContex.Provider>
+        </UsuarioLogadoContext.Provider>
     );
 }
 
-export { UsuarioLogadoContex as UsuarioLogadoContext, UsuarioLogadoProvider };
+export { UsuarioLogadoContext, UsuarioLogadoProvider };

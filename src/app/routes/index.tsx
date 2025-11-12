@@ -6,8 +6,8 @@ export const AppRoutes = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/login" element={<Login />} />
                 <Route path="/" element={<Dashboard />} />
+                <Route path="/login" element={<Login />} />
             </Routes>
         </BrowserRouter>
     );
